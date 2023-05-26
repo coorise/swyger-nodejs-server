@@ -14,7 +14,7 @@ Note2: We made modulable parts for the server with multiple port for auth,databa
 
 ## Step 1: SwygerBase
 SwygerBase is used to store data in json(required for database and storage server).
-Go to ``./base/version/``, read the ``README.md`` file at the root of project there to set the ``.env`` file then in your cmd, type:
+Go to ``./base``, read the ``README.md`` file at the root of project there to set the ``.env`` file then in your cmd, type:
 ```
 npm i
 npm start
@@ -22,21 +22,21 @@ npm start
 Note: In case you won't use Database or Storage server and you want only Auth server, you can skip this step.
 ## Step 2: Swyger Auth
 Auth is used to make authentication: register/login
-Go to ``./auth/version/``, read the ``README.md`` file at the root of project there to set the ``.env`` file then in your cmd, type:
+Go to ``./auth``, read the ``README.md`` file at the root of project there to set the ``.env`` file then in your cmd, type:
 ```
 npm i
 npm start
 ```
 ## Step 3: Swyger Database
 Database is used to do crud whether with Base/MongoDb/MySQL...
-Go to ``./database/version/``, read the ``README.md`` file at the root of project there to set the ``.env`` file then in your cmd, type:
+Go to ``./database``, read the ``README.md`` file at the root of project there to set the ``.env`` file then in your cmd, type:
 ```
 npm i
 npm start
 ```
 ## Step 4: Swyger Storage
 Storage is used to do crud with your file. Actually available location are Discord/Local
-Go to ``./storage/version/``, read the ``README.md`` file at the root of project there to set the ``.env`` file then in your cmd, type:
+Go to ``./storage``, read the ``README.md`` file at the root of project there to set the ``.env`` file then in your cmd, type:
 ```
 npm i
 npm start
