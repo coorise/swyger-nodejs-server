@@ -1,0 +1,72 @@
+#visit: https://docs.docker.com/compose/compose-file/compose-file-v3/
+version: '3.9'
+services:
+  base:
+    container_name: swyger_base
+    image: swyger/base:0.1
+    restart: unless-stopped
+    build: "./base/${SWYGER_BASE_VERSION}"
+    env_file: "./base/${SWYGER_BASE_VERSION}"
+    environment: #Not required if you already set env_file
+      #Config for Swyger/base
+      - PORT= "${BASE_PORT}"
+      #-ACE_NAME=swyger
+      #-ACE_ENABLE_HTTPS=false
+      
+    volumes:
+      - ./base/${SWYGER_BASE_VERSION}:/home/server/swyger/base
+      - ./base/${SWYGER_BASE_VERSION}/node_modules:/home/server/swyger/base/node_modules
+    expose:
+      - "3100"
+    ports:
+      - "3100:3100"
+  auth:
+      container_name: swyger_auth
+      image: swyger/auth:0.1
+      build: "./auth/${SWYGER_AUTH_VERSION}"
+      env_file: "./auth/${SWYGER_AUTH_VERSION}"
+      depends_on:
+        - base
+      environment:
+        - PORT= "${AUTH_PORT}"
+      volumes:
+      - ./auth/${SWYGER_AUTH_VERSION}:/home/server/swyger/auth
+      - ./auth/${SWYGER_AUTH_VERSION}/node_modules:/home/server/swyger/auth/node_modules
+      expose:
+        - "4100"
+      ports:
+        - "4100:4100"
+  database:
+      container_name: swyger_database
+      image: swyger/database:0.1
+      build: "./database/${SWYGER_DATABASE_VERSION}"
+      env_file: "./database/${SWYGER_DATABASE_VERSION}"
+      depends_on:
+        - base
+        - auth
+      environment:
+        - PORT= "${DATABASE_PORT}"
+      volumes:
+      - ./database/${SWYGER_DATABASE_VERSION}:/home/server/swyger/database
+      - ./database/${SWYGER_DATABASE_VERSION}/node_modules:/home/server/swyger/database/node_modules
+      expose:
+        - "4400"
+      ports:
+        - "4400:4400"
+  storage:
+      container_name: swyger_storage
+      image: swyger/storage:0.1
+      build: "./storage/${SWYGER_STORAGE_VERSION}"
+      env_file: "./storage/${SWYGER_STORAGE_VERSION}"
+      depends_on:
+        - base
+        - auth
+      environment:
+        - PORT= "${STORAGE_PORT}"
+      volumes:
+      - ./storage/${SWYGER_BASE_VERSION}:/home/server/swyger/storage
+      - ./storage/${SWYGER_BASE_VERSION}/node_modules:/home/server/swyger/storage/node_modules
+      expose:
+        - "4500"
+      ports:
+        - "4500:4500"
