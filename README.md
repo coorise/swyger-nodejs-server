@@ -9,6 +9,7 @@ Note2: We made modulable parts for the server with multiple port for auth,databa
 
 ### Requirements:
 - NodeJS v16 (https://nodejs.org/en/blog/release/v16.16.0)
+- Git: https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
 - Database Server: MongoDB(https://www.mongodb.com/try/download/community) / MySQL(https://dev.mysql.com/downloads/mysql/) /...etc
 - Docker(https://www.docker.com/products/docker-desktop/) and docker-compose(https://docs.docker.com/compose/install/) in case you want to add it in container
 
@@ -18,7 +19,14 @@ docker-compose -f docker-compose.yaml -d
 ##For development and in local
 docker-compose -f docker-compose-local-dev.yaml -d
 ```
-OR MANUALLY
+Note: If you want to run on local or in dev , you have to clone this repo: ``git clone https://github.com/coorise/swyger-nodejs-server.git`` , <br>
+then make sure do ``npm install`` for each module(base,auth,database,storage...),<br>
+finally do set the docker-compose with a proper ``volume`` for each module with their ``node_modules``
+```
+docker-compose -f docker-compose-local-dev.yaml -d
+```
+
+OR RUN MANUALLY
 ## Step 1: SwygerBase
 SwygerBase is used to store data in json(required for database and storage server).
 Go to ``./base``, read the ``README.md`` file at the root of project there to set the ``.env`` file then in your cmd, type:
