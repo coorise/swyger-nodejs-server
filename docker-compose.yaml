@@ -1,72 +1,78 @@
 #visit: https://docs.docker.com/compose/compose-file/compose-file-v3/
 version: '3.9'
 services:
+  mongodb:
+    container_name: swyger-mongodb
+    image: mongo:4.4.6
+    env_file: .env
+    ports:
+      - "0.0.0.0:${MONGO_PORT}:${MONGO_PORT}"
   base:
-    container_name: swyger_base
-    image: swyger/base:0.1
+    container_name: swyger-base
+    image: swyger/nodejs-base:0.1.0
     restart: unless-stopped
-    build: ./base
-    env_file: ./base
-    environment: #Not required if you already set env_file
-      #Config for Swyger/base
-      - PORT= "${BASE_PORT}"
-      #-ACE_NAME=swyger
-      #-ACE_ENABLE_HTTPS=false
-      
+    env_file: .env
     volumes:
       - ./base:/home/server/swyger/base
       - ./base/node_modules:/home/server/swyger/base/node_modules
-    expose:
-      - "3100"
     ports:
-      - "3100:3100"
+      - "${ACE_PORT}:${ACE_PORT}"
+    #environment: #Not required if you already set env_file
+      #Config for Swyger/base
+      #- ACE_HOST=${ACE_HOST}
+      #- ACE_NAME=swyger
+      #- ACE_ENABLE_HTTPS=false
   auth:
-      container_name: swyger_auth
-      image: swyger/auth:0.1
-      build: ./auth
-      env_file: ./auth
+      container_name: swyger-auth
+      image: swyger/nodejs-auth:0.1.0
+      env_file: .env
       depends_on:
+        - mongodb
         - base
-      environment:
-        - PORT= "${AUTH_PORT}"
       volumes:
-      - ./auth:/home/server/swyger/auth
-      - ./auth/node_modules:/home/server/swyger/auth/node_modules
-      expose:
-        - "4100"
+        - ./auth:/home/server/swyger/auth
+        - ./auth/node_modules:/home/server/swyger/auth/node_modules
+      extra_hosts:
+        - "host.docker.internal:host-gateway"
       ports:
-        - "4100:4100"
+        - "0.0.0.0:${AUTH_PORT}:${AUTH_PORT}"
+      command: npm run dev
+      environment:
+        - ACE_HOST=${ACE_HOST_CLIENT}
+
   database:
-      container_name: swyger_database
-      image: swyger/database:0.1
-      build: ./database
-      env_file: ./database
+      container_name: swyger-database
+      image: swyger/nodejs-database:0.1.0
+      env_file: .env
       depends_on:
+        - mongodb
         - base
         - auth
-      environment:
-        - PORT= "${DATABASE_PORT}"
       volumes:
-      - ./database:/home/server/swyger/database
-      - ./database/node_modules:/home/server/swyger/database/node_modules
-      expose:
-        - "4400"
+        - ./database:/home/server/swyger/database
+        - ./database/node_modules:/home/server/swyger/database/node_modules
+      extra_hosts:
+        - "host.docker.internal:host-gateway"
       ports:
-        - "4400:4400"
+        - "0.0.0.0:${DATABASE_PORT}:${DATABASE_PORT}"
+      environment:
+        - ACE_HOST=${ACE_HOST_CLIENT}
+
   storage:
-      container_name: swyger_storage
-      image: swyger/storage:0.1
-      build: ./storage
-      env_file: ./storage
+      container_name: swyger-storage
+      image: swyger/nodejs-storage:0.1.0
+      env_file: .env
       depends_on:
+        - mongodb
         - base
         - auth
-      environment:
-        - PORT= "${STORAGE_PORT}"
       volumes:
-      - ./storage:/home/server/swyger/storage
-      - ./storage/node_modules:/home/server/swyger/storage/node_modules
-      expose:
-        - "4500"
+        - ./storage:/home/server/swyger/storage
+        - ./storage/node_modules:/home/server/swyger/storage/node_modules
+      extra_hosts:
+        - "host.docker.internal:host-gateway"
       ports:
-        - "4500:4500"
+        - "0.0.0.0:${STORAGE_PORT}:${STORAGE_PORT}"
+      environment:
+        - ACE_HOST=${ACE_HOST_CLIENT}
+

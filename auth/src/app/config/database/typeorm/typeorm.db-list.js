@@ -13,12 +13,16 @@ let user={
     username:process.env.DB_USERNAME||'root',
     password:process.env.DB_PASSWORD||'',
 }
+
 let mongoClient=mongo.MongoClient
-let url="mongodb://"+user.username+':'+user.password+'@'+localhost+":"+port+"/"+dbName
-mongoClient?.connect(url, (err, db) => {
+let url="mongodb://"+user.username+':'+user.password+'@'+localhost+":"+port+"/"+dbName+'?authSource=admin'
+try {
+    mongoClient?.connect(url,{useNewUrlParser:true, useUnifiedTopology: true }, (err, db) => {})
+        ?.then(()=>{})
+        ?.catch(()=>{})
+}catch (e) {
 
-});
-
+}
 const baseOptions = {
   "TYPEORM_SYNC": true,
   "TYPEORM_LOG": false,
@@ -89,11 +93,11 @@ const dbList = [
     //"TYPEORM_HOST": "host.docker.internal",
     "TYPEORM_HOST": localhost,
     //"TYPEORM_PORT": 28017,
+    "AUTH_SOURCE": 'admin',
     "TYPEORM_PORT": port,
     "TYPEORM_USER": user.username,
     "TYPEORM_PWD": user.password,
     "TYPEORM_DB": dbName,
-
   },baseMongoOptions),
   /*Object.assign({
     "TYPEORM_TYPE": "mysql",

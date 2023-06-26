@@ -107,6 +107,7 @@ Once the server is running in ``development mode ``and everything is ok, visit: 
 
 # Issues
 - Some bugs still remain
+- Swagger UI v4.1.3 only, compatible with Docker Container (due to cors)
 
 # Todo
 - Removing/Reduce some unusual dependencies,functions, refactoring paths/files...

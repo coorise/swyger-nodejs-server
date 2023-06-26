@@ -1,4 +1,4 @@
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import generateToken from "./subs/generate-token";
 import generateRefreshToken from "./subs/generate-refresh-token";
 import HTTP_RESPONSE_CODE from "../../../../../../helpers/all-http-response-code";

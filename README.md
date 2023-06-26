@@ -12,6 +12,13 @@ Note2: We made modulable parts for the server with multiple port for auth,databa
 - Database Server: MongoDB(https://www.mongodb.com/try/download/community) / MySQL(https://dev.mysql.com/downloads/mysql/) /...etc
 - Docker(https://www.docker.com/products/docker-desktop/) and docker-compose(https://docs.docker.com/compose/install/) in case you want to add it in container
 
+## Running with docker compose
+```
+docker-compose -f docker-compose.yaml -d
+##For development and in local
+docker-compose -f docker-compose-local-dev.yaml -d
+```
+OR MANUALLY
 ## Step 1: SwygerBase
 SwygerBase is used to store data in json(required for database and storage server).
 Go to ``./base``, read the ``README.md`` file at the root of project there to set the ``.env`` file then in your cmd, type:

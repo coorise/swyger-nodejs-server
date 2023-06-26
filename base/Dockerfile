@@ -10,7 +10,7 @@ WORKDIR /home/server/swyger/base/
 # where available (npm@5+)
 COPY package*.json ./
 #RUN npm install -g nodemon
-RUN npm install
+#RUN npm install
 
 
 # If you are building your code for production
@@ -19,7 +19,7 @@ RUN npm install
 #Copy from . to .
 COPY . ./
 
-#EXPOSE 4400
+#EXPOSE 3100
 
 #CMD npm run dev
 CMD npm run start

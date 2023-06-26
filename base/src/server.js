@@ -33,4 +33,5 @@ const setting={
         }
     }
 }
+console.log(`Server Environment Mode:`, process.env?.NODE_ENV);
 AceServer(setting).start()

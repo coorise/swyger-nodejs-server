@@ -1,4 +1,5 @@
-import bcrypt from "bcrypt";
+// @ts-ignore
+import bcrypt from "bcryptjs";
 import TypeModel from "../../../../../helpers/common/model/typeorm/types.model";
 import { decorate } from 'ts-mixer';
 

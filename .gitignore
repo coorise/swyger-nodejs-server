@@ -8,5 +8,7 @@
 # Removing backup version for project
 **/.backup/
 **/v*.zip
+**/.git
+**/..git
 
 storage/storage/**

@@ -1,5 +1,5 @@
 import userService from "../../../../users/services/typeorm/users.service";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import HTTP_RESPONSE_CODE from "../../../../../../helpers/all-http-response-code";
 
 const updateAccount = async (entities,user, args) => {

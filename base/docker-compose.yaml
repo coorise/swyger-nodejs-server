@@ -2,15 +2,18 @@
 version: '3.9'
 services:
   base:
-    build: .
-    container_name: swyger_base
-    image: swyger/base:0.1
+    container_name: swyger-base
+    image: swyger/base:0.1.0
     restart: unless-stopped
+    build: ./ #In case you did not publish on docker hub
     env_file: .env
     volumes:
-      - .:/home/server/swyger/base/
-      - ./node_modules:/home/server/swyger/auth/node_modules
-    expose:
-      - "4400"
+      - ./:/home/server/swyger/base
+      - ./node_modules:/home/server/swyger/base/node_modules
     ports:
-      - "4400:4400"
+      - "${ACE_PORT}:${ACE_PORT}"
+      #environment: #Not required if you already set env_file
+      #Config for Swyger/base
+      #- ACE_HOST=${ACE_HOST}
+      #- ACE_NAME=swyger
+      #- ACE_ENABLE_HTTPS=false

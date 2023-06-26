@@ -2,15 +2,19 @@
 version: '3.9'
 services:
   database:
-    build: .
-    container_name: swyger_database
-    image: swyger/database:0.1
-    restart: unless-stopped
+    container_name: swyger-database
+    image: swyger/nodejs-database:0.1.0
     env_file: .env
+    depends_on:
+      - mongodb
+      - base
+      - auth
     volumes:
-      - .:/home/server/swyger/database/
-      - ./node_modules:/home/server/swyger/auth/node_modules
-    expose:
-      - "4400"
+      - ./:/home/server/swyger/database
+      - ./node_modules:/home/server/swyger/database/node_modules
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     ports:
-      - "4400:4400"
+      - "0.0.0.0:${PORT}:${PORT}"
+    environment:
+      - ACE_HOST=${ACE_HOST}
