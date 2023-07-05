@@ -4,7 +4,9 @@ services:
   database:
     container_name: swyger-database
     image: swyger/nodejs-database:0.1.0
-    build: ./database
+    build: #In case you did not publish on docker hub
+      context: ./
+      dockerfile: Dockerfile-dev
     env_file: .env
     depends_on:
       - mongodb

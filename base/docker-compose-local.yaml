@@ -5,11 +5,11 @@ services:
     container_name: swyger-base
     image: swyger/nodejs-base:0.1.0
     restart: unless-stopped
-    build: ./base #In case you did not publish on docker hub
+    build: ./ #In case you did not publish on docker hub
     env_file: .env
     volumes:
       - ./:/home/server/swyger/base
-      - ./node_modules:/home/server/swyger/base/node_modules
+      #- ./node_modules:/home/server/swyger/base/node_modules
     ports:
       - "${ACE_PORT}:${ACE_PORT}"
       #environment: #Not required if you already set env_file

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import 'module-alias/register';
 import './module-alias'
 import dotenv from 'dotenv';

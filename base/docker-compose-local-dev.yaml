@@ -5,7 +5,9 @@ services:
     container_name: swyger-base
     image: swyger/nodejs-base:0.1.0
     restart: unless-stopped
-    build: ./base #In case you did not publish on docker hub
+    build: #In case you did not publish on docker hub
+      context: ./
+      dockerfile: Dockerfile-dev
     env_file: .env
     volumes:
       - ./:/home/server/swyger/base
