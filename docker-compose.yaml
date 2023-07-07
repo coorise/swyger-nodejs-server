@@ -12,9 +12,9 @@ services:
     image: swyger/nodejs-base:0.1.0
     restart: unless-stopped
     env_file: .env
-    volumes:
-      - ./base:/home/server/swyger/base
-      - ./base/node_modules:/home/server/swyger/base/node_modules
+    #volumes:
+      #- ./base:/home/server/swyger/base
+      #- ./base/node_modules:/home/server/swyger/base/node_modules
     ports:
       - "${ACE_PORT}:${ACE_PORT}"
     #environment: #Not required if you already set env_file
@@ -29,9 +29,9 @@ services:
       depends_on:
         - mongodb
         - base
-      volumes:
-        - ./auth:/home/server/swyger/auth
-        - ./auth/node_modules:/home/server/swyger/auth/node_modules
+      #volumes:
+        #- ./auth:/home/server/swyger/auth
+        #- ./auth/node_modules:/home/server/swyger/auth/node_modules
       extra_hosts:
         - "host.docker.internal:host-gateway"
       ports:
@@ -48,9 +48,9 @@ services:
         - mongodb
         - base
         - auth
-      volumes:
-        - ./database:/home/server/swyger/database
-        - ./database/node_modules:/home/server/swyger/database/node_modules
+      #volumes:
+        #- ./database:/home/server/swyger/database
+        #- ./database/node_modules:/home/server/swyger/database/node_modules
       extra_hosts:
         - "host.docker.internal:host-gateway"
       ports:
@@ -66,9 +66,9 @@ services:
         - mongodb
         - base
         - auth
-      volumes:
-        - ./storage:/home/server/swyger/storage
-        - ./storage/node_modules:/home/server/swyger/storage/node_modules
+      #volumes:
+        #- ./storage:/home/server/swyger/storage
+        #- ./storage/node_modules:/home/server/swyger/storage/node_modules
       extra_hosts:
         - "host.docker.internal:host-gateway"
       ports:

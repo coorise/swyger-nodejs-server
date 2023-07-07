@@ -8,10 +8,10 @@ services:
       context: ./
       dockerfile: Dockerfile-dev
     env_file: .env
-    depends_on:
-      - mongodb
-      - base
-      - auth
+    #depends_on:
+      #- mongodb
+      #- base
+      #- auth
     volumes:
       - ./:/home/server/swyger/database
       - ./node_modules:/home/server/swyger/database/node_modules

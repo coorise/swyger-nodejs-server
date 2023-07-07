@@ -4,11 +4,11 @@ services:
   auth:
     container_name: swyger-auth
     image: swyger/nodejs-auth:0.1.0
-    build: ./auth
+    build: ./
     env_file: .env
-    depends_on:
-      - mongodb
-      - base
+    #depends_on:
+      #- mongodb
+      #- base
     volumes:
       - ./:/home/server/swyger/auth
       - ./node_modules:/home/server/swyger/auth/node_modules
@@ -16,6 +16,5 @@ services:
       - "host.docker.internal:host-gateway"
     ports:
       - "0.0.0.0:${PORT}:${PORT}"
-    command: npm run dev
     environment:
       - ACE_HOST=${ACE_HOST}

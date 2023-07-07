@@ -6,10 +6,10 @@ services:
     image: swyger/nodejs-database:0.1.0
     build: ./
     env_file: .env
-    depends_on:
-      - mongodb
-      - base
-      - auth
+    #depends_on:
+      #- mongodb
+      #- base
+      #- auth
     volumes:
       - ./:/home/server/swyger/database
       - ./node_modules:/home/server/swyger/database/node_modules

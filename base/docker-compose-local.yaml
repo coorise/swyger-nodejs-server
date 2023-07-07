@@ -9,7 +9,7 @@ services:
     env_file: .env
     volumes:
       - ./:/home/server/swyger/base
-      #- ./node_modules:/home/server/swyger/base/node_modules
+      - ./node_modules:/home/server/swyger/base/node_modules
     ports:
       - "${ACE_PORT}:${ACE_PORT}"
       #environment: #Not required if you already set env_file

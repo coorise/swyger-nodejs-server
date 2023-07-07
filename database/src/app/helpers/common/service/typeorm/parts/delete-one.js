@@ -1,5 +1,6 @@
 import HTTP_RESPONSE_CODE from "../../../../all-http-response-code";
 import {mode} from "../../../../../config";
+import findOne from "./find-one";
 const deleteOne = async (driver,repository,data)=>{
 
   let response={}
@@ -20,28 +21,30 @@ const deleteOne = async (driver,repository,data)=>{
         try{
           if(drive){
             if(drive?.type === "mysql"){
-              const repo=await  repository?.repositorySQL(drive?.name.toString())
-              dat = await repo?.db?.delete(data); //data=user
-              if(dat.affected===0){
+              dat = await findOne(driver,repository,data); //data=user
+              if(dat?.data){
+                model=dat?.data
+                const repo=await  repository?.repositorySQL(drive?.name.toString())
+                await repo?.db?.delete(data); //data=user
+              }else {
                 errors.push({
-                  msg:'The $data is not found in database',
+                  msg:'The data is not found in database',
                   data:data
                 })
-              }else {
-                model=true
               }
 
             }
             else{
-              const repo=await  repository?.repositoryMongo(drive?.name.toString())
-              dat = await repo?.db?.delete(data);
-              if(dat.affected===0){
+              dat = await findOne(driver,repository,data); //data=user
+              if(dat?.data){
+                model=dat?.data
+                const repo=await  repository?.repositoryMongo(drive?.name.toString())
+                await repo?.db?.delete(data); //data=user
+              }else {
                 errors.push({
-                  msg:'The $data is not found in database',
+                  msg:'The data is not found in database',
                   data:data
                 })
-              }else {
-                model=true
               }
 
             }

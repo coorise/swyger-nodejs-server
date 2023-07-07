@@ -5,12 +5,12 @@ services:
     container_name: swyger-auth
     image: swyger/nodejs-auth:0.1.0
     env_file: .env
-    depends_on:
-      - mongodb
-      - base
-    volumes:
-      - ./:/home/server/swyger/auth
-      - ./node_modules:/home/server/swyger/auth/node_modules
+    #depends_on:
+      #- mongodb
+      #- base
+    #volumes:
+      #- ./:/home/server/swyger/auth
+      #- ./node_modules:/home/server/swyger/auth/node_modules
     extra_hosts:
       - "host.docker.internal:host-gateway"
     ports:

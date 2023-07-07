@@ -75,7 +75,6 @@ const findOne = async (driver,repository,data)=>{
                 //where: { token:{$eq:token} }
                 where: subData
               });
-
               if(dat){
                 let ModelClass= {}
                 if(repo?.model){

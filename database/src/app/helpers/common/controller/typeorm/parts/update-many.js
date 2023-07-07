@@ -2,7 +2,7 @@ import {sendResultWithError} from "../../../../send_result";
 
 const updateMany =async (service,name,req, res, next)=>{
   const option={ //this is for socket emission
-    path:name+'/update-many',
+    path:'/update',
     function:'updateMany'
   }
   await sendResultWithError(service,option,req,res,next)

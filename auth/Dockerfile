@@ -10,7 +10,7 @@ WORKDIR /home/server/swyger/auth/
 # where available (npm@5+)
 COPY package*.json ./
 #RUN npm install -g nodemon
-#RUN npm install -f
+RUN npm install
 
 
 # If you are building your code for production

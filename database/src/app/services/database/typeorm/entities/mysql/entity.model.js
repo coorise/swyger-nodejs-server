@@ -11,8 +11,8 @@ let base = Base
 //console.log('file ',base)
 
 let getFiles=(data=[
-    base+'/app/core/**/models/typeorm/*.schema.json',
-    base+'/app/api/**/models/typeorm/*.schema.json',
+    base+'/app/rest/core/**/models/typeorm/*.schema.json',
+    base+'/app/rest/api/**/models/typeorm/*.schema.json',
 ])=> {
     return glob.sync(
         data,
