@@ -22,6 +22,18 @@ services:
       #- ACE_HOST=${ACE_HOST}
       #- ACE_NAME=swyger
       #- ACE_ENABLE_HTTPS=false
+  mailer:
+    container_name: swyger-mailer
+    image: swyger/nodejs-mailer:0.1.0
+    restart: unless-stopped
+    env_file: .env
+      #volumes:
+    #- ./base:/home/server/swyger/mailer
+    #- ./base/node_modules:/home/server/swyger/mailer/node_modules
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    ports:
+      - "0.0.0.0:${MAILER_PORT}:${MAILER_PORT}"
   auth:
       container_name: swyger-auth
       image: swyger/nodejs-auth:0.1.0
@@ -29,6 +41,7 @@ services:
       depends_on:
         - mongodb
         - base
+        - mailer
       #volumes:
         #- ./auth:/home/server/swyger/auth
         #- ./auth/node_modules:/home/server/swyger/auth/node_modules
@@ -36,7 +49,6 @@ services:
         - "host.docker.internal:host-gateway"
       ports:
         - "0.0.0.0:${AUTH_PORT}:${AUTH_PORT}"
-      command: npm run dev
       environment:
         - ACE_HOST=${ACE_HOST_CLIENT}
 

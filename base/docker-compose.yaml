@@ -3,7 +3,7 @@ version: '3.9'
 services:
   base:
     container_name: swyger-base
-    image: swyger/nodejs-base:0.1.0
+    image: coorise/swyger-nodejs-base:0.1.0
     restart: unless-stopped
     env_file: .env
     #volumes:

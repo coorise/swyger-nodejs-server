@@ -3,7 +3,7 @@ version: '3.9'
 services:
   database:
     container_name: swyger-database
-    image: swyger/nodejs-database:0.1.0
+    image: coorise/swyger-nodejs-database:0.1.0
     build: ./
     env_file: .env
     #depends_on:

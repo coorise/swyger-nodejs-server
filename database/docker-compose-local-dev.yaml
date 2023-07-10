@@ -3,7 +3,7 @@ version: '3.9'
 services:
   database:
     container_name: swyger-database
-    image: swyger/nodejs-database:0.1.0
+    image: coorise/swyger-nodejs-database:0.1.0
     build: #In case you did not publish on docker hub
       context: ./
       dockerfile: Dockerfile-dev

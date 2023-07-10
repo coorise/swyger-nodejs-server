@@ -46,10 +46,6 @@ server.listen(PORT,HOST,null, () => {
   console.log(`------------Socket Api url servers---------------`);
 });
 
-
-
-//const CreateClass = Object.assign(new Foo, { a: 1 })
-
 /*const exitHandler = () => {
   if (server) {
     server.close(() => {
